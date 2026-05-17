@@ -1,0 +1,165 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: #ffffff;
+  --color-foreground: #121212;
+  --color-muted: #6b6b6b;
+  --color-line: #e6e6e6;
+  --color-accent: #121212;
+  --font-sans: 'Assistant', var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  --font-serif: 'Cormorant Garamond', 'Times New Roman', serif;
+}
+
+/* Note: Tailwind v4's preflight already resets margin, padding, and box-sizing.
+   Do NOT add a `* { margin: 0; padding: 0 }` block here — it loads AFTER Tailwind's
+   utilities layer and silently overrides every padding/margin utility class. */
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: #ffffff;
+  color: #121212;
+  font-family: 'Assistant', system-ui, -apple-system, sans-serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-serif-display {
+  font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+::selection {
+  background: #121212;
+  color: #ffffff;
+}
+
+/* Marquee for announcement bar */
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.ticker-track { animation: ticker 40s linear infinite; }
+
+/* Subtle product card hover */
+.product-card .product-img {
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.product-card:hover .product-img {
+  transform: scale(1.04);
+}
+
+/* Slide-in on view */
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.fade-up.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Solid CTA */
+.btn-solid {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 32px;
+  background: #121212;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border: 1px solid #121212;
+  transition: background 0.2s ease, color 0.2s ease;
+  cursor: pointer;
+}
+.btn-solid:hover {
+  background: #ffffff;
+  color: #121212;
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 32px;
+  background: transparent;
+  color: #121212;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border: 1px solid #121212;
+  transition: background 0.2s ease, color 0.2s ease;
+  cursor: pointer;
+}
+.btn-outline:hover {
+  background: #121212;
+  color: #ffffff;
+}
+
+/* Form inputs */
+.input-line {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #121212;
+  padding: 12px 0;
+  font-size: 15px;
+  color: #121212;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+.input-line::placeholder { color: #9a9a9a; }
+.input-line:focus { border-bottom-color: #6b6b6b; }
+
+.input-block {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #e6e6e6;
+  padding: 12px 14px;
+  font-size: 14px;
+  color: #121212;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+.input-block:focus { border-color: #121212; }
+
+/* Filter pill checkbox */
+.filter-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-weight: 600;
+  border: 1px solid #e6e6e6;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.15s ease;
+  background: #ffffff;
+  color: #121212;
+}
+.filter-pill:hover { border-color: #121212; }
+.filter-pill[data-active="true"] {
+  background: #121212;
+  color: #ffffff;
+  border-color: #121212;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: #f5f5f5; }
+::-webkit-scrollbar-thumb { background: #cfcfcf; border-radius: 0; }
+::-webkit-scrollbar-thumb:hover { background: #121212; }
+
+/* Hide scrollbar on inventory carousel */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
