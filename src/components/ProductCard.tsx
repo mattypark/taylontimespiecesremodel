@@ -1,14 +1,21 @@
+"use client";
+
 import Link from "next/link";
+import { useState } from "react";
 import type { Product } from "@/lib/products";
 
+const FALLBACK = "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1400&q=85";
+
 export function ProductCard({ product }: { product: Product }) {
+  const [src, setSrc] = useState(product.img);
   return (
     <Link href={`/shop/${product.slug}`} className="product-card group block fade-up">
       <div className="aspect-square overflow-hidden bg-[#f5f5f5] mb-4 relative">
         <img
-          src={product.img}
+          src={src}
           alt={product.name}
           loading="lazy"
+          onError={() => { if (src !== FALLBACK) setSrc(FALLBACK); }}
           className="product-img w-full h-full object-cover"
         />
         {product.justListed && (

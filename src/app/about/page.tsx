@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 export const metadata = {
   title: "About | Taylon Timepieces",
   description: "Family-owned, collector-trusted since 2009.",
@@ -100,20 +98,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-[#f7f6f3] px-6 lg:px-10 py-20 md:py-24 text-center">
-        <div className="max-w-[800px] mx-auto fade-up">
-          <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-6 leading-[1.05]">
-            Come by the store.
-          </h2>
-          <p className="text-base md:text-lg text-[#6b6b6b] mb-10 leading-relaxed">
-            218 Madison Avenue, New York, NY 10016 — by appointment, Mon–Sat 10–6 ET.
-          </p>
-          <div className="flex flex-wrap justify-center gap-3">
-            <Link href="/contact" className="btn-solid">Book an Appointment</Link>
-            <Link href="/shop" className="btn-outline">Browse Inventory</Link>
-          </div>
-        </div>
-      </section>
     </>
   );
 }

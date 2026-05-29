@@ -30,39 +30,34 @@ export function Header() {
         scrolled ? "border-[#e6e6e6] shadow-sm" : "border-transparent"
       }`}
     >
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-10 h-[72px] flex items-center justify-between relative">
-        {/* Left: country selector / mobile menu */}
-        <div className="flex items-center gap-3 text-xs tracking-wide text-[#6b6b6b]">
-          <button
-            aria-label="Menu"
-            className="md:hidden p-1"
-            onClick={() => setOpen((s) => !s)}
-          >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-              <path d="M3 6h18M3 12h18M3 18h18" />
-            </svg>
-          </button>
-          <div className="hidden md:flex items-center gap-2">
-            <span className="inline-block w-4 h-3 bg-gradient-to-b from-[#3c3b6e] via-white to-[#b22234]" />
-            <span>USD</span>
-          </div>
-        </div>
-
-        {/* Center: logo */}
-        <Link
-          href="/"
-          className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center leading-none"
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-10 h-[64px] flex items-center gap-6">
+        {/* Mobile menu toggle */}
+        <button
+          aria-label="Menu"
+          className="md:hidden p-1 -ml-1"
+          onClick={() => setOpen((s) => !s)}
         >
-          <span className="text-[22px] md:text-[26px] font-extrabold tracking-[6px] uppercase">
-            Taylon
-          </span>
-          <span className="text-[9px] md:text-[10px] tracking-[5px] uppercase text-[#6b6b6b] mt-1">
-            Timepieces
-          </span>
-        </Link>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+            <path d="M3 6h18M3 12h18M3 18h18" />
+          </svg>
+        </button>
+
+        {/* Left: nav */}
+        <nav className="hidden md:flex items-center gap-8 flex-1 text-[12px] tracking-[2px] uppercase font-semibold text-[#121212]">
+          <Link href="/" className="hover:text-[#6b6b6b] transition-colors">Home</Link>
+          {NAV.map((l) => (
+            <Link
+              key={l.href}
+              href={l.href}
+              className="hover:text-[#6b6b6b] transition-colors"
+            >
+              {l.label}
+            </Link>
+          ))}
+        </nav>
 
         {/* Right: icons */}
-        <div className="flex items-center gap-5 text-[#121212]">
+        <div className="flex items-center gap-5 text-[#121212] ml-auto md:ml-0">
           <button aria-label="Search" className="hover:opacity-60 transition-opacity">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
               <circle cx="11" cy="11" r="7" />
@@ -87,22 +82,6 @@ export function Header() {
           </Link>
         </div>
       </div>
-
-      {/* Sub-nav (desktop) */}
-      <nav className="hidden md:block border-t border-[#e6e6e6]">
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-10 h-[48px] flex items-center justify-center gap-10 text-[12px] tracking-[2px] uppercase font-semibold text-[#121212]">
-          <Link href="/" className="hover:text-[#6b6b6b] transition-colors">Home</Link>
-          {NAV.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              className="hover:text-[#6b6b6b] transition-colors"
-            >
-              {l.label}
-            </Link>
-          ))}
-        </div>
-      </nav>
 
       {/* Mobile menu */}
       {open && (

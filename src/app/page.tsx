@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ProductCard } from "@/components/ProductCard";
-import { getFeatured, getJustListed } from "@/lib/products";
+import { getFeatured, getJustListed, getProduct } from "@/lib/products";
 
 /* ============================================================================
  * TAYLON TIMEPIECES — Homepage
@@ -30,35 +30,91 @@ export default function Home() {
 }
 
 function Hero() {
+  const hero = getProduct("rolex-datejust-41-wimbledon") ?? getFeatured()[0];
   return (
-    <section className="relative w-full h-[68vh] md:h-[78vh] min-h-[520px] overflow-hidden bg-[#0a0a0a]">
-      <img
-        src="https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?w=2000&q=85"
-        alt="Luxury watch hero"
-        className="absolute inset-0 w-full h-full object-cover opacity-90"
-      />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />
+    <section className="relative w-full h-[80vh] min-h-[600px] overflow-hidden">
+      {/* Split background — white left, gold right */}
+      <div className="absolute inset-0 flex" aria-hidden>
+        <div className="flex-1 bg-white" />
+        <div className="flex-1 bg-[#c8a96a]" />
+      </div>
 
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-10 h-full flex items-center">
-        <div className="max-w-xl text-white">
-          <p className="text-[11px] tracking-[4px] uppercase text-white/70 mb-5">
-            Authenticated · Insured · Guaranteed
-          </p>
-          <h1 className="text-4xl md:text-6xl font-extrabold leading-[0.95] tracking-tight mb-6">
-            Taylon Luxury Watches
-          </h1>
-          <p className="text-base md:text-lg text-white/80 max-w-md mb-10 leading-relaxed">
-            The finest pre-owned luxury timepieces, hand-selected and authenticated by our in-house experts.
-          </p>
-          <div className="flex flex-wrap gap-3">
-            <Link href="/shop" className="btn-solid !bg-white !text-[#121212] !border-white hover:!bg-transparent hover:!text-white">
-              Shop All
-            </Link>
-            <Link href="/shop?price=under-5k" className="btn-outline !text-white !border-white hover:!bg-white hover:!text-[#121212]">
-              Deals Under $5K
-            </Link>
-          </div>
+      {/* Huge backdrop T — straddles the split */}
+      <div
+        className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
+        aria-hidden
+      >
+        <span
+          className="font-serif-display leading-[0.8]"
+          style={{
+            fontSize: "clamp(420px, 64vw, 1100px)",
+            letterSpacing: "-0.06em",
+            color: "rgba(18,18,18,0.08)",
+            transform: "translateX(-33px)",
+            fontWeight: 500,
+          }}
+        >
+          T
+        </span>
+      </div>
+
+      {/* TAY / LON wordmark */}
+      <div
+        className="absolute inset-0 grid grid-cols-2 items-center pointer-events-none select-none"
+        aria-hidden
+      >
+        <div
+          className="text-right pr-[10vw] font-serif-display leading-[0.85]"
+          style={{
+            fontSize: "clamp(180px, 19vw, 340px)",
+            color: "#121212",
+            letterSpacing: "-0.02em",
+            fontWeight: 500,
+          }}
+        >
+          TAY
         </div>
+        <div
+          className="text-left pl-[10vw] font-serif-display leading-[0.85]"
+          style={{
+            fontSize: "clamp(180px, 19vw, 340px)",
+            color: "#ffffff",
+            letterSpacing: "-0.02em",
+            fontWeight: 500,
+          }}
+        >
+          LON
+        </div>
+      </div>
+
+      {/* Centered watch over the gap */}
+      {hero && (
+        <div
+          className="absolute inset-0 flex items-center justify-center pointer-events-none"
+          aria-hidden
+          style={{ transform: "translateX(13px)" }}
+        >
+          <img
+            src={hero.img}
+            alt=""
+            className="h-[58%] md:h-[72%] w-auto object-contain"
+            style={{ filter: "drop-shadow(0 30px 60px rgba(0,0,0,0.35))" }}
+          />
+        </div>
+      )}
+
+      {/* Timepieces wordmark below watch */}
+      <div className="absolute inset-x-0 bottom-24 md:bottom-28 flex justify-center pointer-events-none z-10">
+        <span className="text-[11px] md:text-[13px] tracking-[8px] md:tracking-[12px] uppercase text-[#6b6b6b] font-medium">
+          Timepieces
+        </span>
+      </div>
+
+      {/* CTA — right side */}
+      <div className="absolute bottom-10 md:bottom-14 right-6 md:right-16 lg:right-24 z-10">
+        <Link href="/shop" className="btn-solid !bg-white !text-[#121212] !border-white shadow-lg">
+          Shop the Collection
+        </Link>
       </div>
     </section>
   );
